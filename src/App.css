@@ -40,3 +40,6 @@ left: auto !important; */
 .material-icons:hover{
   cursor: pointer;
 }
+.collection-item{
+  width: 100%;
+}
