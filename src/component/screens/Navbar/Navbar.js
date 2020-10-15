@@ -1,6 +1,6 @@
 import React,{useContext,useRef,useEffect,useState} from 'react'
 import {Link,useHistory} from 'react-router-dom'
-import {UserContext} from '../../App' 
+import {UserContext} from '../../../App' 
 import M from 'materialize-css'
 const Navbar = () =>{
   const searchModal = useRef(null)
@@ -20,14 +20,14 @@ const Navbar = () =>{
           <li key="3"><Link to="/create">Create Post</Link></li>,
           <li key="4"><Link to="/followingposts">My following Posts</Link></li>,
          <li key="5">
-         <button className="btn waves-effect waves-light #e53935 red darken-1" 
+         <h5  style={{color:'black',padding:"8px 15px 0 15px",fontSize:"15px",}}
                  onClick={()=>{
                    localStorage.clear()
                    dispatch({type:"CLEAR"})
                    history.push('/signin')
-                 }}>
-                     Logout
-                </button>
+                 }}>Logout</h5>
+                     
+               
        </li>
         ]
     }else{

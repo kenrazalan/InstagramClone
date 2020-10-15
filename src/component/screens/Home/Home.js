@@ -1,10 +1,11 @@
 import React,{useState,useEffect, useContext} from 'react'
-import {UserContext} from '../../App'
+import {UserContext} from '../../../App'
 import {Link} from 'react-router-dom'
 
 const Home = () =>{
     const [data,setData] = useState([])
     const {state,dispatch} = useContext(UserContext)
+    console.log(state)
     useEffect(()=>{
         fetch('/allpost',{
             headers:{
@@ -12,7 +13,7 @@ const Home = () =>{
             }
         }).then(res=>res.json())
         .then(result=>{
-            console.log(result)
+            console.log(result) 
             setData(result.posts)
         })
     },[])
@@ -115,17 +116,28 @@ const deletePost= (postid)=>{
            {
                data.map(item=>{
                    return(
-                    <div className="card home-card" key={item._id}>
-                    <h5 style={{
-                        padding:"5px"
+                    <div className="card home-card" key={item._id} >
+                    <div style={{
+                        padding:"10px"
                     }}><Link to={item.postedBy._id == state._id 
                     ?`/profile`:`/profile/${item.postedBy._id}` }>
-                    {item.postedBy.name}</Link>{item.postedBy._id==state._id 
+                        <span> 
+                    <img src={item.postedBy.pic} style={{width: "42px",height: "42px", borderRadius:"80px"}}/> </span>
+                    <span style={{ 
+                        fontSize: '17px',
+                        fontWeight: '600',
+                        verticalAlign: 'super',
+                        paddingLeft: '10px'
+
+                    }}>{item.postedBy.name}</span>
+                    </Link>
+                    
+                    {item.postedBy._id==state._id 
                     && <i className="material-icons"
                     style={{float: "right"}}
                     onClick={()=>
                         deletePost(item._id)
-                    }>delete</i>}</h5>
+                    }>delete</i>}</div>
                     
                     <div className="card-image">
                         <img src={item.photo} alt="photo"/>
@@ -140,7 +152,7 @@ const deletePost= (postid)=>{
                         onClick={()=>{likePost(item._id)}}>thumb_up</i>
                     }
                     
-                   <h6>{item.likes.length} likes</h6>
+                   <h6>{item.likes.length} {item.likes.length>1?'likes':'like'}</h6>
                     <h6>{item.title}</h6>
                    <p>{item.body}</p>
                    {
@@ -170,3 +182,4 @@ const deletePost= (postid)=>{
 
 
 export default Home
+

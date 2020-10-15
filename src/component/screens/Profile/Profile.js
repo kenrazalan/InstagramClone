@@ -1,5 +1,6 @@
 import React,{useEffect,useState,useContext} from 'react'
-import {UserContext} from '../../App'
+import {UserContext} from '../../../App'
+import {useStyles} from './style'
 
 const Profile = () =>{
     const [mypics,setMypic] =useState([])
@@ -62,7 +63,7 @@ const Profile = () =>{
        
     }
 
-  
+    const classes = useStyles()
     return(
         <div style={{maxWidth:"550px",margin:"0px auto"}}>
             <div style={{
@@ -78,19 +79,21 @@ const Profile = () =>{
              
                 </div>
                 <div>
-                    <h4>{state?state.name:"loading"}</h4>
-                    <h4>{state?state.email:"loading"}</h4>
-                    <div style={{display:"flex", justifyContent: "space-between",width: "108%"}}>
-                         <h6>{mypics.length} posts</h6>
-                        <h6>{state?state.followers.length:"0"} followers</h6>
-                        <h6>{state?state.following.length:"0"} following</h6>
+                    <h4> {state?state.name:"loading"}</h4>
+                    {/* <h4>{state?state.email:"loading"}</h4> */}
+                    <div className={classes.profileInfo}>
+                         <h6><span className={classes.numFollowers}>{mypics.length}</span> posts</h6>
+                        <h6>{state?<span className={classes.numFollowers}>{state.followers.length}</span>
+                        :"0"} followers</h6>
+                        <h6>{state ? <span className={classes.numFollowers}>{state.following.length}</span>
+                        :"0"} following</h6>
                     </div>
                 </div>
             </div>
                 <div className="file-field input-field" style={{
                     margin:"10px"
                 }}>
-                     <div className="btn #64b5f6 blue darken-2">
+                     <div className={`btn ${classes.ggg}`}>
                     <span>Change Picture</span>
                     <input type="file" onChange={(e)=>{updatePhoto(e.target.files[0])}}/>
                         </div>

@@ -1,5 +1,5 @@
 import React,{useEffect,useState,useContext} from 'react'
-import {UserContext} from '../../App'
+import {UserContext} from '../../../App'
 import {useParams} from 'react-router-dom'
 
 const UserProfile = () =>{
@@ -100,8 +100,8 @@ const UserProfile = () =>{
             </div>
             <div>
                 <h4>{userProfile.user.name}</h4>
-                <h4>{userProfile.user.email}</h4>
-                <div style={{display:"flex", justifyContent: "space-between",width: "108%"}}>
+                {/* <h4>{userProfile.user.email}</h4> */}
+                <div >
                     <h6>{userProfile.posts.length} posts</h6>
                     <h6>{userProfile.user.followers.length} followers</h6>
                     <h6>{userProfile.user.following.length} following</h6>
