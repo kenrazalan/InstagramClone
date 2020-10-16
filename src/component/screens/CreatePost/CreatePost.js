@@ -106,7 +106,7 @@ const postDetails =() =>{
                      Submit Post
                 </button>
         </div>
-    ) 
+    )
 }
 
 export default CreatePost

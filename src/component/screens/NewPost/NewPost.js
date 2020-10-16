@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import styled from 'styled-components'
 import Modal from '../Modal'
 import {NewPostIcon} from '../Icons'
 import M from 'materialize-css'
 import {useHistory} from 'react-router-dom'
+import Loader from '../Loader'
 
 const NewPostWrapper = styled.div`
   .newpost-header {
@@ -55,7 +56,8 @@ const NewPost = () => {
     const [url,setUrl] = useState("")
     const history = useHistory()
 
-  
+   
+
     const handleUploadImage = (e) => {
       if (e.target.files[0]) {
         const reader = new FileReader();
@@ -83,6 +85,7 @@ const NewPost = () => {
             console.log(data.url)
     
             setUrl(data.url)
+            
         }).catch(error=>{
             console.log(error)
         })
@@ -94,35 +97,10 @@ const NewPost = () => {
     
     const handleSubmitPost = () => {
       
-    
+     
+            
         setShowModal(false);
-    
- 
-    
-        // const cleanedCaption = body.value
-        //   .split(" ")
-        //   .filter((caption) => !caption.startsWith("#"))
-        //   .join(" ");
-    
-        // body.setValue("");
-    
-        // const newPost = {
-        //   body: body,
-        //   pic: url,
-          
-        // };
-    
-        // client(`/posts`, { body: newPost }).then((res) => {
-        //   const post = res.data;
-        //   post.isLiked = false;
-        //   post.isSaved = false;
-        //   post.isMine = true;
-        //   setFeed([post, ...feed]);
-        //   window.scrollTo(0, 0);
-        //   toast.success("Your post has been submitted successfully");
-        // });
-
-
+     
         fetch("/createpost",{
             method: "post",
             headers:{
@@ -142,6 +120,7 @@ const NewPost = () => {
         }).catch((error)=>{
             console.log(error)
         })
+    
     }
 
 
@@ -173,9 +152,9 @@ const NewPost = () => {
                 <h3 onClick={() => setShowModal(false)}>Cancel</h3>
                 <h3 onClick={()=>handleSubmitPost()}>Share</h3>
               </div>
-              {preview && (
-                <img className="post-preview" src={preview} alt="preview" />
-              )}
+              {preview && url ?
+                (<img className="post-preview" src={preview} alt="preview" />
+              ) :<Loader/>}
               <div>
                 <textarea
                   placeholder="Add caption"
