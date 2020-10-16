@@ -4,7 +4,6 @@ import {useHistory} from 'react-router-dom'
 
 const CreatePost = () =>{
     const history = useHistory()
-    const [title,setTitle] = useState("")
     const [body,setBody] = useState("")
     const [image,setImage] = useState("")
     const [url,setUrl] = useState("")
@@ -20,7 +19,6 @@ useEffect(()=>{
             "Authorization": "Bearer "+ localStorage.getItem("jwt"),
             "Content-Type": "application/json"
         },body:JSON.stringify({
-            title,
             body,
             pic: url
         })
@@ -88,11 +86,6 @@ const postDetails =() =>{
             padding: "20px",
             textAlign: "center"
         }}>
-            <input 
-            type="text" 
-            placeholder="title"
-            value={title}
-            onChange={(e)=>setTitle(e.target.value)}/>
 
             <input 
             type="text" 
@@ -113,7 +106,7 @@ const postDetails =() =>{
                      Submit Post
                 </button>
         </div>
-    )
+    ) 
 }
 
 export default CreatePost
