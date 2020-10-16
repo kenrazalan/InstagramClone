@@ -10,6 +10,7 @@ const history = useHistory()
     const [name,setName] = useState("")
     const [password,setPassword] = useState("")
     const [email,setEmail] = useState("")
+    const [username,setUsername] = useState("")
     const [image,setImage] = useState("")
     const [url,setUrl] = useState(undefined)
 
@@ -54,6 +55,7 @@ const history = useHistory()
                 body: JSON.stringify({
                     name,
                     password,
+                    username,
                     email,
                     pic: url
                 })
@@ -98,6 +100,13 @@ const history = useHistory()
                  value={email}
                  onChange={(e)=>{
                      setEmail(e.target.value)
+                 }}/>
+                     <input
+                 type="text"
+                 placeholder="username"
+                 value={username}
+                 onChange={(e)=>{
+                     setUsername(e.target.value)
                  }}/>
                  <input
                  type="password"
