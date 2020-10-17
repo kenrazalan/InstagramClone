@@ -37,6 +37,7 @@ const Home = () =>{
                     return item
                 }
             })
+            console.log(newData)
             setData(newData)
         }).catch(error=>{
             console.log(error)
@@ -115,6 +116,8 @@ const deletePost= (postid)=>{
        <div className="home">
            {
                data.map(item=>{
+                  
+                   
                    return(
                     <div className="card home-card" key={item._id} >
                     <div style={{

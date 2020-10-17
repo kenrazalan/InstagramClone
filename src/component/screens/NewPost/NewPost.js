@@ -82,8 +82,6 @@ const NewPost = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data.url)
-    
             setUrl(data.url)
             
         }).catch(error=>{
@@ -114,6 +112,7 @@ const NewPost = () => {
             if(data.error){
                 M.toast({html: data.error, classes:"#e53935 red darken-1"})
             }else{
+                console.log(data)
                 M.toast({html: "Post Created",classes:"#66bb6a green lighten-1"})
                              history.push('/')
             }

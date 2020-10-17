@@ -7,7 +7,7 @@ import Login from './component/screens/Login/Login'
 import Signup from './component/screens/Signup/Signup'
 import Profile from './component/screens/Profile/Profile'
 import CreatePost from './component/screens/CreatePost/CreatePost'
-
+import {FeedProvider} from './component/context/FeedContext'
 import NewPost from './component/screens/NewPost/NewPost'
 
 import UserProfile from './component/screens/UserProfile/UserProfile'
@@ -15,8 +15,8 @@ import Reset from './component/screens/Reset/Reset'
 import FollowingsPosts from './component/screens/FollowingsPosts/FollowingsPosts'
 import Newpassword from './component/screens/Newpassword/Newpassword'
 import {initialState, reducer} from './reducers/userReducer'
-
 export const UserContext = createContext()
+
 
 const Routing= () =>{
   const history = useHistory()
@@ -76,10 +76,12 @@ function App() {
   const [state,dispatch] = useReducer(reducer,initialState)
   return (
     <UserContext.Provider value={{state,dispatch}}>
+    <FeedProvider>
     <BrowserRouter>
     <Navbar/>
     <Routing/>
     </BrowserRouter>
+    </FeedProvider>
     </UserContext.Provider>
   );
 }
