@@ -123,7 +123,7 @@ const deletePost= (postid)=>{
                     <div style={{
                         padding:"10px"
                     }}><Link to={item.postedBy._id == state._id 
-                    ?`/profile`:`/profile/${item.postedBy._id}` }>
+                    ?`/profileheader`:`/profile/${item.postedBy._id}` }>
                         <span> 
                     <img src={item.postedBy.pic} style={{width: "42px",height: "42px", borderRadius:"80px"}}/> </span>
                     <span style={{ 

@@ -1,4 +1,5 @@
 import React,{useEffect,createContext,useReducer, useContext} from 'react';
+import Container from './component/screens/Container'
 import Navbar from './component/screens/Navbar/Navbar'
 import './App.css'
 import {BrowserRouter,Route,Switch,useHistory} from 'react-router-dom'
@@ -9,7 +10,8 @@ import Profile from './component/screens/Profile/Profile'
 import CreatePost from './component/screens/CreatePost/CreatePost'
 import {FeedProvider} from './component/context/FeedContext'
 import NewPost from './component/screens/NewPost/NewPost'
-
+import ProfileHeader from './component/screens/ProfileHeader'
+import ProfileOthers from './component/screens/ProfileOthers'
 import UserProfile from './component/screens/UserProfile/UserProfile'
 import Reset from './component/screens/Reset/Reset'
 import FollowingsPosts from './component/screens/FollowingsPosts/FollowingsPosts'
@@ -32,6 +34,7 @@ const Routing= () =>{
     }
   },[])  
   return(
+    <Container>
     <Switch>
         <Route exact path='/'>
               <Home/>
@@ -42,9 +45,9 @@ const Routing= () =>{
             <Route path='/signup'>
               <Signup/>
             </Route>
-            <Route exact path='/profile'>
+            {/* <Route exact path='/profile'>
               <Profile/>
-            </Route>
+            </Route> */}
             <Route path='/create'>
               <CreatePost/>
             </Route>
@@ -53,12 +56,18 @@ const Routing= () =>{
             <Route path='/newpost'>
               <NewPost/>
             </Route>
-
-
-
+            <Route path='/ProfileHeader'>
+              <ProfileHeader/>
+            </Route>  
             <Route path='/profile/:userid'>
-              <UserProfile/>
+              <ProfileOthers/>
             </Route>
+
+
+
+            {/* <Route path='/profile/:userid'>
+              <UserProfile/>
+            </Route> */}
             <Route path='/followingposts'>
               <FollowingsPosts/>
             </Route>
@@ -69,6 +78,7 @@ const Routing= () =>{
               <Newpassword/>
             </Route>
         </Switch>
+        </Container>
   )
 }
 
@@ -76,12 +86,14 @@ function App() {
   const [state,dispatch] = useReducer(reducer,initialState)
   return (
     <UserContext.Provider value={{state,dispatch}}>
+   
     <FeedProvider>
     <BrowserRouter>
     <Navbar/>
     <Routing/>
     </BrowserRouter>
     </FeedProvider>
+
     </UserContext.Provider>
   );
 }

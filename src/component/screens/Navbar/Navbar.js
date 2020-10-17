@@ -17,7 +17,7 @@ const Navbar = () =>{
     if(state){
         return[  
           <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
-          <li key="2"><Link to="/profile">Profile</Link></li>,
+          <li key="2"><Link to="/profileheader">Profile</Link></li>,
           // <li key="3"><Link to="/create">Create Post</Link></li>,
           <li>
           <NewPost />
@@ -61,7 +61,7 @@ const Navbar = () =>{
   }
     return (
       <nav>
-        <div className="nav-wrapper white" >
+        <div className="nav-wrapper white z-depth-0" >
           <Link to={state?"/":"/signin"} className="brand-logo left">
             Instagram
           </Link>
