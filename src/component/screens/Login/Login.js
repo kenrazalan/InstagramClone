@@ -9,6 +9,7 @@ const Login = () =>{
     const history = useHistory()
     const [password,setPassword] = useState("")
     const [email,setEmail] = useState("")
+    const [load,setLoad] = useState(true)
 
     const PostData =() =>{
         const emailValidation = `/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/`
@@ -30,8 +31,11 @@ const Login = () =>{
         .then(data=>{
             console.log(data)
             if(data.error){
-                M.toast({html: data.error, classes:"#e53935 red darken-1"})
+                
+                M.toast({html: data.error, classes:"#e53935 red darken-1"});
+                setLoad(true)
             }else{
+               
                 localStorage.setItem("jwt",data.token)
                 localStorage.setItem("user",JSON.stringify(data.user))
                 dispatch({type:"USER",payload:data.user})
@@ -46,7 +50,7 @@ const Login = () =>{
     return(
         <div className="mycard">
             <div className="card auth-card">
-                <h2>Instagram</h2>
+                <h2 className="brand-logo">Instagram</h2>
                 <input
                  type="text"
                  placeholder="email"
@@ -61,10 +65,13 @@ const Login = () =>{
                  onChange={(e)=>{
                      setPassword(e.target.value)
                  }}/>
+                 {load?
                  <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
-                 onClick={()=>PostData()}>
-                     Login
-                </button>
+                 onClick={()=>{PostData(); setLoad(false)}}>
+                   Login
+                </button> :<button className="buttonload">
+  <i className="fa fa-spinner fa-spin"></i>Loading
+</button> }
                 <h5>
                     <Link to="/signup">Dont have an account?</Link>
                 </h5>

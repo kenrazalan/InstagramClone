@@ -255,7 +255,7 @@ const ProfileHeader = () => {
 
   const [mypics,setMypic] =useState([])
   const {state,dispatch}= useContext(UserContext)
-
+  const history = useHistory()
 console.log(state)
   useEffect(()=>{
     fetch('/myPost',{
@@ -284,7 +284,10 @@ console.log(state)
                 >
                   Edit Profile
                 </Button>
-                <OptionsIcon/>
+                <OptionsIcon  onClick={()=>{
+                   localStorage.clear()
+                   dispatch({type:"CLEAR"})
+                   history.push('/signin')}}/>
               </div>
           </div>
 
