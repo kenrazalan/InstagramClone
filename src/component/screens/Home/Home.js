@@ -8,7 +8,6 @@ const Home = () =>{
     const [data,setData] = useState([])
     const {state,dispatch} = useContext(UserContext)
     const [load,setLoad] = useState(true)
-    console.log(state)
     useEffect(()=>{
         fetch('/allpost',{
             headers:{
@@ -16,11 +15,11 @@ const Home = () =>{
             }
         }).then(res=>res.json())
         .then(result=>{
-            console.log(result) 
+        
             setData(result.posts)
             setLoad(false)
         })
-    },[])
+    },[state])
 
     const likePost =(id)=>{
         fetch("/like",{
