@@ -7,6 +7,7 @@ import Loader from './../Loader'
 const Home = () =>{
     const [data,setData] = useState([])
     const {state,dispatch} = useContext(UserContext)
+    const [load,setLoad] = useState(true)
     console.log(state)
     useEffect(()=>{
         fetch('/allpost',{
@@ -17,6 +18,7 @@ const Home = () =>{
         .then(result=>{
             console.log(result) 
             setData(result.posts)
+            setLoad(false)
         })
     },[])
 
@@ -111,12 +113,15 @@ const deletePost= (postid)=>{
             return item._id !== result._id
         })
         setData(newData)
+       
     })
-}
+}       
+if (load) {
+    return <Loader/>;
+  }
 
     return(
-        <>
-        {data?
+       
        <div className="home"> 
            {
                data.map(item=>{
@@ -188,8 +193,7 @@ const deletePost= (postid)=>{
             }
            
            </div>
-            : <Loader/>
-            }</>
+           
     )}
 
 
