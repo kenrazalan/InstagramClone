@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Button = styled.button`
   background-color: #0095f6;
@@ -11,14 +11,7 @@ const Button = styled.button`
   font-family: "Fira Sans", sans-serif;
   font-size: 1rem;
 
-  ${(props) =>
-    props.secondary &&
-    css`
-      background: none;
-      color: #242424;
-      border: 1px solid #dbdbdb;
-      font-weight: 500;
-    `}
+  
 `;
 
 export default Button;
