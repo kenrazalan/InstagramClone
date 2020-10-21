@@ -132,16 +132,18 @@ const Nav = () =>{
     return (
         <NavWrapper>
       <div className="nav">
-      
+          
           <Link to={state?"/":"/signin"} className="brand-logo left">
           <img className="nav-logo" src={navlogo} alt="logo" />
           </Link>
           <ul id="nav-mobile" className="right">
            {renderList()}
           </ul>
+
           <div id="modal1" class="modal" ref={searchModal} style={{color: "black"}} >
-          <div className="modal-content" >
-          <input
+
+          <div className="modal-content"  >
+          <input style={{display: "flex"}}
                  type="text"
                  placeholder="Search"
                  value={search}
@@ -149,13 +151,14 @@ const Nav = () =>{
                      fetchUsers(e.target.value)
                  }}/>
                         
-            <ul className="collection">
+            <ul className="collection" style={{display:"flex",flexDirection:"column"}}>
               {userDetails.map(item=>{
-                return  <Link to={item._id !== state._id ? `/profile/${item._id}`: "/profile"  } onClick={()=>{
-                  M.Modal.getInstance(searchModal.current).close() 
-                  setSearch("")
-                  setUserDetails([])
-                }}><li className="collection-item">{item.name}</li></Link> 
+                    return  <Link to={item._id !== state._id ? `/profile/${item._id}`: "/profileheader" }         onClick={()=>{
+                          M.Modal.getInstance(searchModal.current).close() 
+                          setSearch("")
+                          setUserDetails([])
+                            }}>
+                  <li className="collection-item">{item.name}</li></Link> 
               })}
             
             

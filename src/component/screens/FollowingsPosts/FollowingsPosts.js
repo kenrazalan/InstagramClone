@@ -1,6 +1,7 @@
 import React,{useState,useEffect, useContext} from 'react'
 import {UserContext} from '../../../App'
 import {Link} from 'react-router-dom'
+import Loader from './../Loader'
 
 const FollowingsPosts = () =>{
     const [data,setData] = useState([])
@@ -111,21 +112,34 @@ const deletePost= (postid)=>{
 }
 
     return(
+        <>
+        {data?
        <div className="home">
            {
                data.map(item=>{
                    return(
                     <div className="card home-card" key={item._id}>
-                    <h5 style={{
-                        padding:"5px"
+                    <div style={{
+                        padding:"10px"
                     }}><Link to={item.postedBy._id == state._id 
-                    ?`/profile`:`/profile/${item.postedBy._id}` }>
-                    {item.postedBy.name}</Link>{item.postedBy._id==state._id 
+                    ?`/profileheader`:`/profile/${item.postedBy._id}` }>
+                        <span> 
+                    <img src={item.postedBy.pic} style={{width: "42px",height: "42px", borderRadius:"80px"}}/> </span>
+                    <span style={{ 
+                        fontSize: '17px',
+                        fontWeight: '600',
+                        verticalAlign: 'super',
+                        paddingLeft: '10px'
+
+                    }}>{item.postedBy.name}</span>
+                    </Link>
+                    
+                    {item.postedBy._id==state._id 
                     && <i className="material-icons"
                     style={{float: "right"}}
                     onClick={()=>
                         deletePost(item._id)
-                    }>delete</i>}</h5>
+                    }>delete</i>}</div>
                     
                     <div className="card-image">
                         <img src={item.photo} alt="photo"/>
@@ -154,6 +168,7 @@ const deletePost= (postid)=>{
                    <form onSubmit={(e)=>{
                        e.preventDefault()
                        makeComment(e.target[0].value,item._id)
+                       e.target[0].value= ""
                    }}>
                         <input type="text" placeholder="add a comment"/>
                    </form>
@@ -164,7 +179,8 @@ const deletePost= (postid)=>{
                })
             }
            
-           </div> 
+           </div>  : <Loader/>
+            }</>
      
     )}
 

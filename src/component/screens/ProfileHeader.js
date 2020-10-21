@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Button from "./Button";
 import { OptionsIcon ,PostIcon,SavedIcon} from "./Icons";
 import {UserContext} from '../../App'
-
+import Loader from './../screens/Loader'
 
 const WrapperPost = styled.div`
 margin-top: 1rem;
@@ -271,6 +271,7 @@ console.log(state)
 
   return (
     <>
+    {mypics?
     <Wrappers>
       <Wrapper>
         <img className="avatar" src={state?state.pic:"loading"} alt="avatar" />
@@ -353,7 +354,7 @@ console.log(state)
 
 
       </Wrappers>
-     
+     : <Loader/>}
     </>
   );
 };

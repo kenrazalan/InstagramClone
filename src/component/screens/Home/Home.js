@@ -1,6 +1,8 @@
 import React,{useState,useEffect, useContext} from 'react'
 import {UserContext} from '../../../App'
 import {Link} from 'react-router-dom'
+import Loader from './../Loader'
+
 
 const Home = () =>{
     const [data,setData] = useState([])
@@ -113,12 +115,14 @@ const deletePost= (postid)=>{
 }
 
     return(
-       <div className="home">
+        <>
+        {data?
+       <div className="home"> 
            {
                data.map(item=>{
-                  
-                   
+          
                    return(
+                    
                     <div className="card home-card" key={item._id} >
                     <div style={{
                         padding:"10px"
@@ -169,18 +173,23 @@ const deletePost= (postid)=>{
                    <form onSubmit={(e)=>{
                        e.preventDefault()
                        makeComment(e.target[0].value,item._id)
+                       e.target[0].value= ""
                    }}>
                         <input type="text" placeholder="add a comment"/>
                    </form>
                        
                     </div>
-               </div>
-                   )
+               </div> 
+               
+               )
+
+
                })
             }
            
-           </div> 
-     
+           </div>
+            : <Loader/>
+            }</>
     )}
 
 
