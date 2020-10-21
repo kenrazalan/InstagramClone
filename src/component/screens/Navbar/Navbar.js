@@ -3,6 +3,9 @@ import {Link,useHistory} from 'react-router-dom'
 import {UserContext} from '../../../App' 
 import M from 'materialize-css'
 import NewPost from "../NewPost/NewPost";
+import {ExploreIcon} from '../Icons'
+
+
 const Navbar = () =>{
   const searchModal = useRef(null)
   const [search,setSearch] = useState('')
@@ -17,12 +20,24 @@ const Navbar = () =>{
     if(state){
         return[  
           <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
-          <li key="2"><Link to="/profileheader">Profile</Link></li>,
+        
           // <li key="3"><Link to="/create">Create Post</Link></li>,
           <li>
           <NewPost />
         </li>,
-          <li key="4"><Link to="/followingposts">My following Posts</Link></li>,
+          <li key="4"><Link to="/followingposts"><ExploreIcon/></Link></li>,
+            <li key="2"><Link to="/profileheader">
+               <img
+                style={{
+                  width: "24px",
+                  height: "24px",
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                }}
+                src={state.pic}
+                alt="avatar"
+              />
+            </Link></li>,
          <li key="5">
          <h5  style={{color:'black',padding:"8px 15px 0 15px",fontSize:"15px",}}
                  onClick={()=>{

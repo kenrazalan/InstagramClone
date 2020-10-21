@@ -216,7 +216,7 @@ const Wrapper = styled.div`
   @media screen and (max-width: 645px) {
     font-size: 1rem;
 
-    
+    .bio,
     .profile-stats {
       display: none;
     }

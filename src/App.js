@@ -1,6 +1,9 @@
 import React,{useEffect,createContext,useReducer, useContext} from 'react';
 import Container from './component/screens/Container'
 import Navbar from './component/screens/Navbar/Navbar'
+
+import Nav from './component/screens/Nav'
+
 import './App.css'
 import {BrowserRouter,Route,Switch,useHistory} from 'react-router-dom'
 import Home from './component/screens/Home/Home'
@@ -89,7 +92,7 @@ function App() {
    
     <FeedProvider>
     <BrowserRouter>
-    <Navbar/>
+    <Nav/>
     <Routing/>
     </BrowserRouter>
     </FeedProvider>
