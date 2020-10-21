@@ -150,7 +150,7 @@ const deletePost= (postid)=>{
                         <img src={item.photo} alt="photo"/>
                     </div>
                     <div className="card-content">
-                    <i className="material-icons">favorite</i>
+                    {/* <i className="material-icons">favorite</i> */}
                     {
                         item.likes.includes(state._id)
                         ?    <i className="material-icons"

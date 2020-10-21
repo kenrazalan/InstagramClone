@@ -96,7 +96,7 @@ const history = useHistory()
                   <input
                  type="text"
                  placeholder="email"
-                 value={email}
+                 value={email.toLowerCase()}
                  onChange={(e)=>{
                      setEmail(e.target.value)
                  }}/>
