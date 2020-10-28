@@ -2,7 +2,22 @@ import React,{useState,useEffect, useContext} from 'react'
 import {UserContext} from '../../../App'
 import {Link} from 'react-router-dom'
 import Loader from './../Loader'
+import styled from 'styled-components'
 
+const Wrapper = styled.div`
+.home-card{
+    border: 1px solid #DBDBDB !important;
+    box-shadow: none !important;
+}
+// .home-input{
+//     border-radius: 4px !important;
+//     border: 1px solid #DBDBDB !important;
+//     padding: 0.1rem 0.5rem !important;
+//     width: 100% !important;
+//     margin-left: 0;
+//     height: 2rem !important;
+// }
+`
 
 const Home = () =>{
     const [data,setData] = useState([])
@@ -120,7 +135,7 @@ if (load) {
   }
 
     return(
-       
+       <Wrapper>
        <div className="home"> 
            {
                data.map(item=>{
@@ -129,11 +144,12 @@ if (load) {
                     
                     <div className="card home-card" key={item._id} >
                     <div style={{
-                        padding:"10px"
+                        padding:"10px",
+                        margin: "0"
                     }}><Link to={item.postedBy._id == state._id 
                     ?`/profileheader`:`/profile/${item.postedBy._id}` }>
                         <span> 
-                    <img src={item.postedBy.pic} style={{width: "42px",height: "42px", borderRadius:"80px"}}/> </span>
+                    <img src={item.postedBy.pic} style={{width: "42px",height: "42px", borderRadius:"80px",marginBottom: "-10px"}}/> </span>
                     <span style={{ 
                         fontSize: '17px',
                         fontWeight: '600',
@@ -157,20 +173,20 @@ if (load) {
                     {/* <i className="material-icons">favorite</i> */}
                     {
                         item.likes.includes(state._id)
-                        ?    <i className="material-icons"
+                        ?    <i style={{marginTop: "-5px"}} className="material-icons"
                         onClick={()=>{unlikePost(item._id)}}>thumb_down</i>
-                        :   <i className="material-icons"
+                        :   <i style={{marginTop: "-5px"}} className="material-icons"
                         onClick={()=>{likePost(item._id)}}>thumb_up</i>
                     }
                     
-                   <h6>{item.likes.length} {item.likes.length>1?'likes':'like'}</h6>
-                    <h6>{item.title}</h6>
-                   <p>{item.body}</p>
+                   <div className="bold">{item.likes.length} {item.likes.length>1?'likes':'like'}</div>
+                    <div >{item.title}</div>
+                   <p style={{fontSize:"13px"}}>{item.body}</p>
                    {
                        item.comments.map(record=>{
                            console.log(record)
                            return(
-                           <h6 key={record._id}><span style={{fontWeight:"500"}}>{record.postedBy.name}</span> {record.text}</h6>
+                           <div key={record._id}><span style={{fontWeight:"600"}}>{record.postedBy.name}</span> {record.text}</div>
                            )
                        })
                    }
@@ -179,20 +195,18 @@ if (load) {
                        makeComment(e.target[0].value,item._id)
                        e.target[0].value= ""
                    }}>
-                        <input type="text" placeholder="add a comment"/>
+                        <input className="home-input" type="text" placeholder="add a comment"/>
                    </form>
                        
                     </div>
                </div> 
                
                )
-
-
                })
             }
            
            </div>
-           
+           </Wrapper>
     )}
 
 

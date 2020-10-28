@@ -1,7 +1,33 @@
 import React,{useState,useEffect}from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import M from 'materialize-css'
+import styled from 'styled-components'
 
+const Wrapper = styled.div`
+.auth-card{
+    border: 1px solid #DBDBDB !important;
+    box-shadow: none !important;
+}
+.signup-input{
+    border-radius: 4px !important;
+    border: 1px solid #DBDBDB !important;
+    padding: 0.1rem 0.5rem !important;
+    width: 95% !important;
+    height: 2rem !important;
+}
+.acc-already{
+    color: #0095f6!important;
+    font-weight: 600;
+}
+.brand-logo{
+    font-family: 'Grand Hotel', cursive ;
+  }
+button{
+    font-weight: 600 !important;
+    width: 100% !important;
+    margin-bottom: 2em;
+}
+`
 
 const Signup = () =>{
 
@@ -82,10 +108,12 @@ const history = useHistory()
     }
     
     return(
+        <Wrapper>
         <div className="mycard">
             <div className="card auth-card">
                 <h2 className="brand-logo">Instagram</h2>
                 <input
+                className="signup-input"
                  type="text"
                  placeholder="name"
                  value={name}
@@ -94,6 +122,7 @@ const history = useHistory()
                  }}
                  />
                   <input
+                  className="signup-input"
                  type="text"
                  placeholder="email"
                  value={email.toLowerCase()}
@@ -101,6 +130,7 @@ const history = useHistory()
                      setEmail(e.target.value)
                  }}/>
                      <input
+                     className="signup-input"
                  type="text"
                  placeholder="username"
                  value={username}
@@ -108,13 +138,14 @@ const history = useHistory()
                      setUsername(e.target.value)
                  }}/>
                  <input
+                 className="signup-input"
                  type="password"
                  placeholder="password"
                  value={password}
                  onChange={(e)=>{
                      setPassword(e.target.value)
                  }}/>
-                  <div className="file-field input-field">
+                  {/* <div className="file-field input-field">
                     <div className="btn #64b5f6 blue darken-2">
                     <span>Upload Picture</span>
                     <input type="file" onChange={(e)=>{setImage(e.target.files[0])}}/>
@@ -122,7 +153,7 @@ const history = useHistory()
                 <div className="file-path-wrapper">
                     <input className="file-path validate" type="text"/>
                 </div>
-                </div>
+                </div> */}
                 {load?
 
                  <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
@@ -133,11 +164,12 @@ const history = useHistory()
 </button>
                     }
 
-                <h5>
-                    <Link to="/signin">Already have an account?</Link>
-                </h5>
+                <div style={{marginTop:"1em"}}>
+                  Already have an account? <Link className="acc-already" to="/signin">Sign in</Link>
+                </div>
             </div>
         </div>
+        </Wrapper>
     )
 }
 
