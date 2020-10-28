@@ -93,7 +93,8 @@ const NewPost = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-            setUrl(data.url)
+          console.log(data)
+            setUrl(data.secure_url)
             
         }).catch(error=>{
             console.log(error)

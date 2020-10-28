@@ -61,7 +61,7 @@ const history = useHistory()
         .then(data=>{
             console.log(data.url)
     
-            setUrl(data.url)
+            setUrl(data.secure_url)
         }).catch(error=>{
             console.log(error)
         })

@@ -115,7 +115,7 @@ const ProfileForm = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-            setNewProfile(data.url)
+            setNewProfile(data.secure_url)
             
         }).catch(error=>{
             console.log(error)
