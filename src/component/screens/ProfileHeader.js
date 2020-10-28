@@ -256,6 +256,7 @@ const ProfileHeader = () => {
   const [mypics,setMypic] =useState([])
   const {state,dispatch}= useContext(UserContext)
   const history = useHistory()
+  console.log(state)
 console.log(state)
   useEffect(()=>{
     fetch('/myPost',{
@@ -281,6 +282,7 @@ console.log(state)
               <div className="options">
                 <Button
                   secondary
+                  onClick={() => history.push("/accounts/edit")}
                 >
                   Edit Profile
                 </Button>

@@ -19,6 +19,7 @@ import UserProfile from './component/screens/UserProfile/UserProfile'
 import Reset from './component/screens/Reset/Reset'
 import FollowingsPosts from './component/screens/FollowingsPosts/FollowingsPosts'
 import Newpassword from './component/screens/Newpassword/Newpassword'
+import EditProfile from './component/screens/EditProfile'
 import {initialState, reducer} from './reducers/userReducer'
 export const UserContext = createContext()
 
@@ -64,6 +65,9 @@ const Routing= () =>{
             </Route>  
             <Route path='/profile/:userid'>
               <ProfileOthers/>
+            </Route>
+            <Route path='/accounts/edit'>
+              <EditProfile/>
             </Route>
 
 
