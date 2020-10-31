@@ -3,6 +3,8 @@ import {UserContext} from '../../../App'
 import {Link} from 'react-router-dom'
 import Loader from './../Loader'
 import styled from 'styled-components'
+import {MoreIcon} from './../Icons'
+import Modal from '../Modal'
 
 const Wrapper = styled.div`
 .home-card{
@@ -19,10 +21,52 @@ const Wrapper = styled.div`
 // }
 `
 
+const ModalContentWrapper = styled.div`
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  span:last-child {
+    border: none;
+  }
+
+  span {
+    display: block;
+    padding: 1rem 0;
+    border-bottom: 1px solid #DBDBDB;
+    cursor: pointer;
+  }
+`;
+
+export const ModalContent = ({ postId, closeModal,handleDeletePost,state }) => {
+
+    console.log(postId)
+  return (
+    <ModalContentWrapper>
+      <span className="danger" onClick={closeModal}>
+        Cancel
+      </span>
+      
+      <span className="danger" onClick={()=>{
+        
+          handleDeletePost(postId)
+          closeModal()
+          }} >
+      Delete Post
+    </span>
+      {/* <DeletePost postId={postId} closeModal={closeModal} goToHome={true} /> */}
+    </ModalContentWrapper>
+  );
+};
+
 const Home = () =>{
     const [data,setData] = useState([])
+    const [del,setDelete]= useState("")
     const {state,dispatch} = useContext(UserContext)
     const [load,setLoad] = useState(true)
+    const [showModal, setShowModal] = useState(false);
+    const closeModal = () => setShowModal(false);
     useEffect(()=>{
         fetch('/allpost',{
             headers:{
@@ -158,13 +202,22 @@ if (load) {
 
                     }}>{item.postedBy.name}</span>
                     </Link>
+
+                    {showModal && (
+                        <Modal>
+                            <ModalContent postId={del} handleDeletePost={deletePost} state={state}   closeModal={closeModal} />
+                        </Modal>
+                     )}
+                
+                        {item.postedBy._id==state._id 
+                    && <MoreIcon onClick={() =>{
+                        setShowModal(true);
+                        setDelete(item._id)
+                    } } style={{float:"right"}} />}
                     
-                    {item.postedBy._id==state._id 
-                    && <i className="material-icons"
-                    style={{float: "right"}}
-                    onClick={()=>
-                        deletePost(item._id)
-                    }>delete</i>}</div>
+                    </div>
+
+                      
                     
                     <div className="card-image">
                         <img src={item.photo} alt="photo"/>

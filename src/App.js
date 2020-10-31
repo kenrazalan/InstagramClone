@@ -5,7 +5,7 @@ import Navbar from './component/screens/Navbar/Navbar'
 import Nav from './component/screens/Nav'
 
 import './App.css'
-import {BrowserRouter,Route,Switch,useHistory} from 'react-router-dom'
+import {BrowserRouter as Router,Route,Switch,useHistory} from 'react-router-dom'
 import Home from './component/screens/Home/Home'
 import Login from './component/screens/Login/Login'
 import Signup from './component/screens/Signup/Signup'
@@ -56,16 +56,20 @@ const Routing= () =>{
               <CreatePost/>
             </Route>
 
+            <Route path='/profile/:userid'  render={(props) => {
+                    return ( <ProfileOthers {...props } key={window.location.pathname}/> )
+                }} >
+         
+            </Route>
+
 
             <Route path='/newpost'>
               <NewPost/>
             </Route>
-            <Route path='/ProfileHeader'>
-              <ProfileHeader/>
+            <Route path='/ProfileHeader' component={ProfileHeader}>
+            
             </Route>  
-            <Route path='/profile/:userid'>
-              <ProfileOthers/>
-            </Route>
+            
             <Route path='/accounts/edit'>
               <EditProfile/>
             </Route>
@@ -94,12 +98,12 @@ function App() {
   return (
     <UserContext.Provider value={{state,dispatch}}>
    
-    <FeedProvider>
-    <BrowserRouter>
+ 
+    <Router>
     <Nav/>
     <Routing/>
-    </BrowserRouter>
-    </FeedProvider>
+    </Router>
+   
 
     </UserContext.Provider>
   );
