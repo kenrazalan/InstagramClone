@@ -451,16 +451,45 @@ const ProfileHeader = () => {
         <div className="mobile-profile-stats">
           <span>{state?mypics.length:"0"} posts</span>
 
-          <span className="pointer">
+          <span className="pointer" onClick={() => setFollowersModal(true)}>
             {state?state.followers.length: '0'} followers
           </span>
 
-          <span className="pointer">
+          <span className="pointer" onClick={() => setFollowingModal(true)}>
             {state?state.following.length: '0'} following
           </span>
 
         
         </div>
+
+        {showFollowersModal && state.followers.length > 0 && (
+              <Modal>
+                <ModalContent
+                //  setShFollow={setShowfollow}
+                //   shFollow={showFollow}
+                  // follow={followUser}
+                  // unfollow={unfollowUser}
+                  users={state.followers}
+                  title="Followers"
+                  closeModal={closeModal}
+                  loggedInUser={state}
+                />
+              </Modal>
+            )}
+              {showFollowingModal && state.following.length > 0 && (
+              <Modal>
+                <ModalContent
+                //  setShFollow={setShowfollow}
+                //   shFollow={showFollow}
+                  // follow={followUser}
+                  // unfollow={unfollowUser}
+                  users={state.following}
+                  title="Followers"
+                  closeModal={closeModal}
+                  loggedInUser={state}
+                />
+              </Modal>
+            )}
         <div className="mobile-bio">
           <span className="bold">{state?state.name:"loading"}</span>
         </div>
